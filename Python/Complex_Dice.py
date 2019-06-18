@@ -1,7 +1,7 @@
 #this is for rolling anyset of dice that is choosen by the user
 
 import random
-
+import re
 
 print("Welcome to the first project.")
 print("This is for rolling any type of dice that you want.")
@@ -19,16 +19,16 @@ while True:
 
         #taking the input for the number of sides the dice has
         dice = input("Select the number of sides on the dice: ")
-        dice = dice.upper()
         #taking the int value for the string that was entered
-        number = dice.split("D")
-        #checking the length of the array
-        if len(number) == 1:
-            #result
-            print(random.randint(1,int(number[0])))
-        else:
-            #result
-            print(random.randint(1,int(number[1])))
+        while True:
+            if dice.isdigit():
+                number = int(re.search(r'\d+', dice).group())
+                #result
+                print(random.randint(1,number))
+                break
+            else:
+                dice = input("Please enter a number! ")
+
     #if no proper answer was given to the question
     else:
         print("Please enter a proper response!")
